@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HOLD</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#fdf0f3; --light:#fce8ed; --mid:#f5c6d0;
+  --deep:#e8a0b0; --tp:#c47a8a; --dark:#9a4a5a;
+  --white:#fffafb; --text:#5a3a40;
+}
+html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans-serif; background:var(--bg); color:var(--text); }
+
+.page { position:fixed; inset:0; display:flex; flex-direction:column; background:var(–bg); transition:opacity 0.5s ease; }
+.page.hidden { opacity:0; pointer-events:none; }
+
+/* ━ P1 スプラッシュ */
+#p1 { background:linear-gradient(160deg,#fff0f3,#fce0e8,#f5c6d0); align-items:center; justify-content:center; gap:0.6rem; padding-bottom:3rem; }
+#p1 .ico { font-size:2.8rem; animation:sway 3s ease-in-out infinite; }
+#p1 h1 { font-family:‘Noto Serif JP’,serif; font-size:3.2rem; color:var(–dark); letter-spacing:0.5em; font-weight:300; margin-top:0.3rem; }
+#p1 .t1 { font-family:‘Noto Serif JP’,serif; font-size:1rem; color:var(–dark); letter-spacing:0.2em; margin-top:0.6rem; font-weight:400; }
+#p1 .t2 { font-family:‘Noto Serif JP’,serif; font-size:0.88rem; color:var(–dark); letter-spacing:0.15em; margin-top:0.3rem; font-weight:300; }
+#p1 .dots { display:flex; gap:6px; margin-top:2rem; }
+#p1 .dots span { width:6px; height:6px; border-radius:50%; background:var(–mid); animation:pulse 1.4s ease-in-out infinite; }
+#p1 .dots span:nth-child(2){animation-delay:.2s;}
+#p1 .dots span:nth-child(3){animation-delay:.4s;}
+
+/* ━ P1b 今日のことば */
+#p1b { background:linear-gradient(160deg,#fff0f3,#fce0e8,#f5c6d0); align-items:center; justify-content:center; padding:2rem; gap:1.2rem; padding-bottom:8rem; }
+#p1b .leaf { font-size:2.8rem; animation:sway 3s ease-in-out infinite; }
+#p1b .label { font-family:‘Noto Serif JP’,serif; font-size:0.9rem; color:var(–tp); letter-spacing:0.25em; }
+#p1b .word { font-family:‘Noto Serif JP’,serif; font-size:1.35rem; color:var(–dark); font-weight:400; text-align:center; line-height:2; letter-spacing:0.05em; padding:1.8rem 2rem; background:rgba(255,255,255,0.6); border-radius:20px; border:1px solid var(–mid); max-width:320px; }
+#p1b .hint { font-size:0.85rem; color:var(–tp); letter-spacing:0.1em; animation: fadeUp 1s ease 1s both; }
+
+/* ━ P2 名前入力 */
+#p2 { background:linear-gradient(160deg,#fff5f7,#fce4ea); align-items:center; justify-content:flex-start; padding:5rem 2rem 2rem; gap:1.4rem; }
+#p2 .ico { font-size:2.2rem; animation:sway 3s ease-in-out infinite; }
+#p2 h2 { font-family:‘Noto Serif JP’,serif; font-size:1.05rem; color:var(–dark); font-weight:400; text-align:center; line-height:2; }
+#p2 input { width:100%; max-width:300px; border:1.5px solid var(–mid); border-radius:30px; padding:.9rem 1.3rem; font-family:inherit; font-size:16px; color:var(–text); background:var(–white); outline:none; text-align:center; transition:border-color .2s; }
+#p2 input:focus { border-color:var(–deep); }
+#p2 input::placeholder { color:var(–mid); }
+
+/* ━ P3 クッション */
+#p3 { align-items:center; justify-content:flex-start; padding:5rem 2rem 2rem; gap:1.8rem; }
+#p3 .ico { font-size:2rem; animation:sway 3s ease-in-out infinite; }
+#p3 .box { text-align:center; }
+#p3 .nm { font-family:‘Noto Serif JP’,serif; font-size:1.25rem; color:var(–dark); margin-bottom:1.2rem; }
+#p3 .bd { font-size:.88rem; color:var(–text); line-height:2.1; }
+
+/* ━ ヘッダー＆タブ */
+.hdr { background:linear-gradient(160deg,#fff5f7,#fce4ea); padding:.9rem 1.2rem .75rem; text-align:center; border-bottom:1px solid var(–mid); flex-shrink:0; }
+.hdr .logo { font-family:‘Noto Serif JP’,serif; font-size:1.45rem; color:var(–dark); letter-spacing:.4em; font-weight:300; }
+.hdr .sub { font-size:.63rem; color:var(–tp); letter-spacing:.15em; margin-top:.2rem; }
+.tabs { display:flex; background:var(–light); border-bottom:1px solid var(–mid); flex-shrink:0; }
+.tab { flex:1; padding:.75rem; text-align:center; font-size:.74rem; color:var(–tp); cursor:pointer; transition:all .3s; border-bottom:2px solid transparent; }
+.tab.active { color:var(–dark); border-bottom-color:var(–deep); background:var(–bg); font-weight:500; }
+
+/* ━ P4 チャット */
+#p4 { overflow:hidden; }
+#chat-body { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:.9rem; padding:1rem 1rem .5rem; min-height:0; }
+.msg { max-width:85%; animation:fadeUp .4s ease; }
+.msg.bot { align-self:flex-start; }
+.msg.user { align-self:flex-end; }
+.bubble { padding:.85rem 1rem; font-size:.86rem; line-height:1.8; }
+.msg.bot .bubble { background:var(–white); border-radius:4px 16px 16px 16px; box-shadow:0 2px 10px rgba(200,120,140,.1); border:1px solid var(–light); color:var(–text); }
+.msg.user .bubble { background:linear-gradient(135deg,#f0a0b5,#e07090); color:white; border-radius:16px 16px 4px 16px; box-shadow:0 3px 12px rgba(224,112,144,.3); }
+.msg.closing { max-width:95%; align-self:center; }
+.msg.closing .bubble { background:linear-gradient(135deg,#fff0f3,#fce4ea); border:1.5px solid var(–deep); text-align:center; font-family:‘Noto Serif JP’,serif; font-size:.86rem; color:var(–dark); line-height:2.1; border-radius:16px; box-shadow:0 4px 18px rgba(200,120,140,.15); }
+.mtime { font-size:.62rem; color:var(–mid); margin-top:.28rem; padding:0 .3rem; }
+.msg.user .mtime { text-align:right; }
+.msg.closing .mtime { text-align:center; }
+.typing { display:flex; gap:4px; align-items:center; padding:.85rem 1rem; background:var(–white); border-radius:4px 16px 16px 16px; width:fit-content; box-shadow:0 2px 10px rgba(200,120,140,.1); border:1px solid var(–light); }
+.typing span { width:6px; height:6px; border-radius:50%; background:var(–deep); animation:bounce 1.2s infinite; }
+.typing span:nth-child(2){animation-delay:.2s;}
+.typing span:nth-child(3){animation-delay:.4s;}
+.inp-area { display:flex; gap:.5rem; align-items:center; padding:.6rem .8rem .9rem; border-top:1px solid var(–mid); background:var(–bg); flex-shrink:0; }
+.inp-area textarea { flex:1; min-width:0; border:1.5px solid var(–mid); border-radius:20px; padding:.7rem .9rem; font-family:inherit; font-size:16px; color:var(–text); background:var(–white); resize:none; height:44px; outline:none; transition:border-color .2s; line-height:1.5; overflow:hidden; }
+.inp-area textarea:focus { border-color:var(–deep); }
+.inp-area textarea::placeholder { color:var(–mid); }
+.inp-area textarea:disabled { background:var(–light); }
+.send-btn { width:44px; height:44px; min-width:44px; border-radius:50%; background:linear-gradient(135deg,#f0a0b5,#e07090); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:1rem; color:white; box-shadow:0 3px 12px rgba(224,112,144,.4); flex-shrink:0; transition:all .2s; }
+.send-btn:disabled { opacity:.4; cursor:not-allowed; }
+
+/* ━ P5 行動カード */
+#p5 { overflow:hidden; }
+#cards-body { flex:1; overflow-y:auto; padding:1rem; min-height:0; display:flex; flex-direction:column; gap:1rem; }
+.today-sec { background:linear-gradient(135deg,#fff0f3,#fce4ea); border-radius:16px; padding:1.2rem; border:1px solid var(–mid); text-align:center; }
+.today-nm { font-family:‘Noto Serif JP’,serif; font-size:.92rem; color:var(–dark); margin-bottom:.8rem; line-height:1.8; }
+.today-btn { background:linear-gradient(135deg,#f0a0b5,#e07090); color:white; border:none; border-radius:25px; padding:.72rem 1.8rem; font-family:inherit; font-size:.84rem; cursor:pointer; box-shadow:0 4px 14px rgba(224,112,144,.35); transition:all .2s; }
+.tc { background:var(–white); border-radius:14px; padding:1.2rem; border:1.5px solid var(–deep); text-align:center; animation:fadeUp .4s ease; display:none; margin-top:.8rem; }
+.tc.show { display:block; }
+.tc-lbl { font-size:.7rem; color:var(–tp); letter-spacing:.1em; margin-bottom:.5rem; }
+.tc-ico { font-size:2.2rem; margin-bottom:.5rem; }
+.tc-txt { font-size:.88rem; color:var(–text); line-height:1.7; }
+.sec-ttl { font-size:.78rem; color:var(–tp); letter-spacing:.1em; }
+.buy-banner { background:linear-gradient(135deg,#e07090,#c95070); border-radius:14px; padding:1rem 1.1rem; color:white; display:flex; align-items:center; justify-content:space-between; cursor:pointer; box-shadow:0 4px 14px rgba(224,112,144,.3); transition:all .2s; }
+.buy-banner .bl h3 { font-size:.86rem; margin-bottom:.2rem; }
+.buy-banner .bl p { font-size:.67rem; opacity:.88; line-height:1.5; }
+.buy-btn-sm { background:white; color:#c95070; border:none; border-radius:14px; padding:.42rem .88rem; font-size:.76rem; font-weight:500; cursor:pointer; white-space:nowrap; margin-left:.7rem; font-family:inherit; }
+.cat-sec { margin-bottom:.3rem; }
+.cat-ttl { font-size:.74rem; color:var(–dark); font-weight:500; letter-spacing:.08em; padding:.5rem .3rem .4rem; border-bottom:1px solid var(–light); margin-bottom:.6rem; }
+.cards-grid { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+.acard { background:var(–white); border-radius:12px; padding:.8rem .7rem; cursor:pointer; transition:all .2s; border:1.5px solid var(–light); position:relative; display:flex; align-items:center; justify-content:center; min-height:70px; overflow:hidden; }
+.acard::before { content:’’; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(–mid),var(–deep)); border-radius:12px 12px 0 0; opacity:0; transition:opacity .3s; }
+.acard:hover::before,.acard.done::before { opacity:1; }
+.acard.done { background:linear-gradient(135deg,#fff0f3,#fce8ed); border-color:var(–deep); }
+.cnum { position:absolute; top:.38rem; left:.55rem; font-size:.57rem; color:var(–mid); }
+.cchk { position:absolute; top:.38rem; right:.5rem; font-size:.74rem; color:var(–deep); opacity:0; transition:opacity .3s; }
+.acard.done .cchk { opacity:1; }
+.cico { font-size:1.6rem; line-height:1; display:block; text-align:center; }
+.ctxt { font-size:.75rem; line-height:1.6; color:var(–text); text-align:center; word-break:keep-all; overflow-wrap:break-word; width:100%; }
+.lock-ov { position:absolute; inset:0; background:rgba(253,240,243,.9); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+
+/* ━ モーダル */
+.modal-ov { display:none; position:fixed; inset:0; background:rgba(90,40,50,.4); z-index:200; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
+.modal-ov.show { display:flex; }
+.modal { background:var(–white); border-radius:22px; padding:1.8rem 1.6rem; max-width:310px; width:90%; text-align:center; animation:fadeUp .4s ease; border:1px solid var(–mid); }
+.modal .ico { font-size:1.8rem; margin-bottom:.7rem; }
+.modal h2 { font-family:‘Noto Serif JP’,serif; font-size:1.1rem; color:var(–dark); margin-bottom:.7rem; font-weight:400; }
+.modal p { font-size:.8rem; color:var(–tp); line-height:1.9; margin-bottom:1.3rem; }
+.modal-btn { width:100%; padding:.85rem; border-radius:50px; border:none; font-family:inherit; font-size:.86rem; cursor:pointer; background:linear-gradient(135deg,#f0a0b5,#e07090); color:white; box-shadow:0 4px 14px rgba(224,112,144,.35); transition:all .2s; }
+
+/* ━ 汎用ボタン */
+.btn-main { background:linear-gradient(135deg,#f0a0b5,#e07090); color:white; border:none; border-radius:30px; padding:.9rem 2.2rem; font-family:inherit; font-size:.88rem; cursor:pointer; box-shadow:0 4px 15px rgba(224,112,144,.35); transition:all .2s; }
+.btn-main:hover { transform:translateY(-1px); }
+.btn-go { align-self:center; margin-top:.4rem; background:linear-gradient(135deg,#f0a0b5,#e07090); color:white; border:none; border-radius:20px; padding:.6rem 1.5rem; font-size:.8rem; cursor:pointer; font-family:inherit; box-shadow:0 3px 10px rgba(224,112,144,.3); animation:fadeUp .5s ease; transition:all .2s; }
+.btn-restart { align-self:center; margin-top:.4rem; background:var(–white); border:1.5px solid var(–mid); border-radius:20px; padding:.55rem 1.3rem; font-size:.75rem; color:var(–dark); cursor:pointer; font-family:inherit; transition:all .2s; animation:fadeUp .5s ease; }
+.btn-restart:hover { background:var(–light); }
+
+@keyframes sway { 0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg);} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);} }
+@keyframes pulse { 0%,100%{transform:scale(1);opacity:.5;}50%{transform:scale(1.4);opacity:1;} }
+@keyframes bounce { 0%,80%,100%{transform:translateY(0);opacity:.5;}40%{transform:translateY(-6px);opacity:1;} }
+#chat-body::-webkit-scrollbar,#cards-body::-webkit-scrollbar{width:3px;}
+#chat-body::-webkit-scrollbar-thumb,#cards-body::-webkit-scrollbar-thumb{background:var(–mid);border-radius:3px;}
+</style>
+
+</head>
+<body>
+
+<!-- P1 スプラッシュ -->
+
+<div class="page" id="p1">
+  <div class="ico">🌿</div>
+  <h1>HOLD</h1>
+  <p class="t1">安心に戻るアプリ</p>
+  <p class="t2">全てをやさしく包み込む</p>
+  <div class="dots"><span></span><span></span><span></span></div>
+</div>
+
+<!-- P1b 今日のことば -->
+
+<div class="page hidden" id="p1b">
+  <div class="leaf">🌿</div>
+  <div class="label">今日の安心のことば</div>
+  <div class="word" id="todays-word"></div>
+  <div class="hint">タップして次へ</div>
+</div>
+
+<!-- P2 名前入力 -->
+
+<div class="page hidden" id="p2">
+  <div class="ico">🌿</div>
+  <h2>ここはあなただけの<br>安心の場所です<br><br>あなたのお名前を<br>教えてください</h2>
+  <input id="name-input" type="text" placeholder="お名前（ニックネームでも）"
+    autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+    onkeydown="if(event.key==='Enter'){submitName()}">
+  <button class="btn-main" onclick="submitName()">はじめる 🌿</button>
+</div>
+
+<!-- P3 クッション -->
+
+<div class="page hidden" id="p3">
+  <div class="ico">🌿</div>
+  <div class="box">
+    <div class="nm" id="p3-name"></div>
+    <div class="bd">ここではあなたの気持ちを<br>ゆっくり見つめていきます<br><br>正しい答えを出す必要はありません<br>思いつくまま書いてみてください</div>
+  </div>
+  <button class="btn-main" onclick="goToChat()">次へ 🌿</button>
+</div>
+
+<!-- P4 チャット -->
+
+<div class="page hidden" id="p4">
+  <div class="hdr">
+    <div class="logo">HOLD</div>
+    <div class="sub">安心にもどる</div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" id="tab-chat" onclick="switchTab('chat')">🌿 自分と向き合う</div>
+    <div class="tab" id="tab-cards" onclick="switchTab('cards')">🌿 行動カード</div>
+  </div>
+  <div id="chat-body"></div>
+  <div class="inp-area">
+    <textarea id="user-input" placeholder="今、心にあることをそのまま…" rows="1"
+      autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+      oninput="this.style.height='44px';this.style.height=Math.min(this.scrollHeight,80)+'px'"></textarea>
+    <button class="send-btn" id="send-btn" onclick="sendMsg()">→</button>
+  </div>
+</div>
+
+<!-- P5 行動カード -->
+
+<div class="page hidden" id="p5">
+  <div class="hdr">
+    <div class="logo">HOLD</div>
+    <div class="sub">安心にもどる</div>
+  </div>
+  <div class="tabs">
+    <div class="tab" id="tab2-chat" onclick="switchTab('chat')">🌿 自分と向き合う</div>
+    <div class="tab active" id="tab2-cards" onclick="switchTab('cards')">🌿 行動カード</div>
+  </div>
+  <div id="cards-body">
+    <div class="today-sec">
+      <div class="today-nm" id="today-nm"></div>
+      <button class="today-btn" onclick="showTodayCard()">今日の安心</button>
+      <div class="tc" id="today-card">
+        <div class="tc-lbl">今日はこれをやってみませんか？</div>
+        <div class="tc-ico" id="tc-ico"></div>
+        <div class="tc-txt" id="tc-txt"></div>
+      </div>
+    </div>
+    <div class="sec-ttl">🌿 安心カード 100選</div>
+    <div id="buy-banner" class="buy-banner" onclick="showModal()">
+      <div class="bl">
+        <h3>🌿 行動カード 100選</h3>
+        <p>心と体が楽になる100の小さな行動<br>自分に合ったものを続けてみてください</p>
+      </div>
+      <button class="buy-btn-sm">¥980</button>
+    </div>
+    <div id="cards-list"></div>
+  </div>
+</div>
+
+<!-- モーダル -->
+
+<div class="modal-ov" id="modal">
+  <div class="modal">
+    <div class="ico">🌿</div>
+    <h2>行動カード 100選</h2>
+    <p>心と体が楽になる<br>100の小さな行動。<br><br>無理せずひとつずつ試してみて<br>自分に合ったものを続けてみてください。<br><br>¥980<br>購入すると全部表示されます</p>
+    <button class="modal-btn" onclick="purchase()">購入する</button>
+  </div>
+</div>
+
+<script>
+var ANSIN_WORDS = [
+  '今日はここに来てくれてありがとう',
+  '今のあなたで大丈夫',
+  '焦らなくても大丈夫',
+  'ゆっくりでいいよ',
+  '今日はここで少し休もう',
+  'あなたはひとりじゃない',
+  '今はそれでいい',
+  '今日もよくやっています',
+  '小さな一歩で十分',
+  'ここでは安心していい',
+  '何もできない日があっても大丈夫',
+  '今の気持ちを大切にしてね',
+  '少し深呼吸してみよう',
+  'あなたはちゃんと歩いている',
+  '無理しなくて大丈夫',
+  '今日ここに来ただけで十分',
+  'あなたのペースで大丈夫',
+  'ゆっくり整えていこう',
+  '今のあなたをそのまま受け止めていい',
+  '今日はどんな気持ちでも大丈夫',
+  'あなたはもう十分頑張っている',
+  '小さな安心を一つ見つけてみよう',
+  '何があってもあなたは大切',
+  'ここでは自分に優しくしていい',
+  '少し肩の力を抜いてみよう',
+  '今日もここまで来たね',
+  '今は立ち止まっても大丈夫',
+  'あなたはあなたのままでいい',
+  '安心は少しずつ戻ってくる',
+  '大丈夫。ここにいればいい'
+];
+
+var userName = '';
+var phase = 'initial';
+var unlocked = false;
+var doneCards = {};
+var freeIdx = 0;
+
+var FREE_CARDS = [
+  {e:'☕', t:'温かい飲み物をゆっくり飲む'},
+  {e:'☁️', t:'空を1分ぼーっと眺める'},
+  {e:'💗', t:'胸に手を当てて「大丈夫だよ」と言う'},
+  {e:'💆', t:'肩をくるくる回す'},
+  {e:'✨', t:'今日頑張ったことを1つ認める'}
+];
+
+var DEEP_FLOW = [
+  'よかったら少しだけ一緒に見てみよう\n\nどうしてそう思ったの？',
+  'どうしてそう感じたの？',
+  'それはいつ頃からかな？',
+  'その時、本当はどんな気持ちだった？',
+  'じゃあ本当はどうしたい？\n目を閉じ胸に手を当ててゆっくり\n感じてみてください'
+];
+
+var CATS = [
+  { title:'🌿 心を落ち着ける', cards:[
+    {e:'☁️',t:'空を1分ぼーっと眺める'},{e:'🌊',t:'静かな音を聴く'},{e:'😌',t:'30秒目を閉じて休む'},
+    {e:'🌟',t:'今日良かったことを1つ思い出す'},{e:'😊',t:'今日嬉しかったことを思い出す'},{e:'🎠',t:'今日楽しかったことを思い出す'},
+    {e:'🫁',t:'ゆっくり深呼吸を3回する'},{e:'🏔️',t:'好きな景色を思い浮かべる'},{e:'🌬️',t:'自分の呼吸を静かに感じる'},
+    {e:'📝',t:'今の気持ちをノートに1行書く'},{e:'🕊️',t:'「焦らなくていい」とつぶやく'},{e:'💬',t:'「もう十分だよ」と自分に言う'},
+    {e:'🌈',t:'「私は私でいい」とつぶやく'},{e:'🛡️',t:'「私は安全」と心の中で言う'},{e:'💗',t:'「大丈夫だよ」と自分に言う'}
+  ]},
+  { title:'🌿 体をゆるめる', cards:[
+    {e:'🤸',t:'ゆっくり背伸びをする'},{e:'💆',t:'肩をくるくる回す'},{e:'🌙',t:'首をゆっくり左右に倒す'},
+    {e:'🙌',t:'腕を上げてバンザイする'},{e:'🫁',t:'ゆっくりお腹呼吸をする'},{e:'✊',t:'手をぎゅっと握ってゆるめる'},
+    {e:'🦵',t:'足を軽くトントン動かす'},{e:'🌊',t:'体を軽く揺らしてみる'},{e:'🤲',t:'手首をゆっくり回す'},
+    {e:'🦶',t:'足首をゆっくり回す'},{e:'💪',t:'肩の力をふっと抜く'},{e:'🙆',t:'その場でゆっくり伸びをする'},
+    {e:'🪑',t:'椅子に深く座る'},{e:'🫶',t:'背中を椅子に預ける'},{e:'☕',t:'手を温める'}
+  ]},
+  { title:'🌿 体の感覚を感じる', cards:[
+    {e:'👣',t:'足の裏を感じながら歩く'},{e:'🪨',t:'足の裏を床につけて感覚を感じる'},{e:'👐',t:'手のひらを眺めてみる'},
+    {e:'🦵',t:'足の裏を優しく包む'},{e:'💪',t:'ふくらはぎを優しく挟む'},{e:'🌺',t:'太ももに手を置く'},
+    {e:'💓',t:'胸に手を置く'},{e:'🫶',t:'お腹をトントンする'},{e:'🙏',t:'体をさすってみる'},
+    {e:'🤲',t:'頭をなでる'},{e:'🫂',t:'自分をぎゅっと抱きしめる'},{e:'💝',t:'手をさする'},
+    {e:'🦶',t:'足をさする'},{e:'💗',t:'胸に手を当てて呼吸する'},{e:'🌱',t:'体の重さを感じる'}
+  ]},
+  { title:'🌿 環境を整える', cards:[
+    {e:'🪟',t:'窓を開けて空気を吸う'},{e:'🚶',t:'数分外を歩く'},{e:'🌿',t:'植物に「こんにちは」と声をかける'},
+    {e:'🌼',t:'好きなものを周りに置く'},{e:'🧹',t:'部屋を少しだけ整える'},{e:'☀️',t:'カーテンを開けて光を入れる'},
+    {e:'☁️',t:'空を見上げる'},{e:'🌬️',t:'外の風を感じる'},{e:'🪑',t:'好きな場所に座る'},
+    {e:'🛋️',t:'椅子にゆったり座る'},{e:'🏠',t:'部屋の好きな場所を見る'},{e:'🌞',t:'太陽の光を浴びる'},
+    {e:'🌫️',t:'空気をゆっくり吸う'},{e:'📚',t:'机を少し整える'},{e:'✨',t:'好きな空間を作る'}
+  ]},
+  { title:'🌿 小さな楽しみ', cards:[
+    {e:'🎵',t:'好きな曲を1曲聴く'},{e:'🍰',t:'デザートをゆっくり食べる'},{e:'😂',t:'楽しい動画を見る'},
+    {e:'🌸',t:'好きな香りを嗅ぐ'},{e:'☕',t:'温かい飲み物を飲む'},{e:'🎨',t:'好きな色を見る'},
+    {e:'📷',t:'好きな写真を見る'},{e:'🍬',t:'甘いものを一口食べる'},{e:'🍵',t:'お茶をゆっくり飲む'},
+    {e:'🎶',t:'好きな音楽を流す'},{e:'🏔️',t:'好きな景色を見る'},{e:'🧸',t:'お気に入りのものに触れる'},
+    {e:'🛏️',t:'好きな毛布に触れる'},{e:'🪑',t:'お気に入りの椅子に座る'},{e:'🌺',t:'好きな香りのものを使う'}
+  ]},
+  { title:'🌿 自分を労わる', cards:[
+    {e:'✨',t:'「今日頑張ったね」と言う'},{e:'🙏',t:'「体さんありがとう」と言う'},{e:'💝',t:'「今日もお疲れ様」と言う'},
+    {e:'🌷',t:'「〇〇ちゃんお疲れ様」と言う'},{e:'🫂',t:'自分を優しく抱きしめる'},{e:'🤲',t:'頭をなでてあげる'},
+    {e:'🦶',t:'足をさすってありがとうと言う'},{e:'🙏',t:'体にありがとうと言う'},{e:'💗',t:'胸に手を当てて「大丈夫」と言う'},
+    {e:'😊',t:'自分に微笑んでみる'},{e:'🪞',t:'鏡の中の自分を見る'},{e:'🌻',t:'鏡の中の自分にありがとうと言う'},
+    {e:'⭐',t:'「よくやってるね」と言う'},{e:'🤗',t:'「一緒にいるよ」と言う'},{e:'🌙',t:'「今日はここまででいい」と言う'},
+    {e:'💤',t:'「休んでいいよ」と言う'},{e:'🌸',t:'「よくここまで来たね」と言う'},{e:'🕊️',t:'「無理しなくていいよ」と言う'},
+    {e:'🌿',t:'「ゆっくりで大丈夫」と言う'},{e:'💛',t:'「今のままでいいよ」と言う'},{e:'💖',t:'「あなたは大切だよ」と言う'},
+    {e:'🌱',t:'「今日も生きててえらい」と言う'},{e:'🌈',t:'「少しずつでいいよ」と言う'},{e:'🏠',t:'「ここにいていいよ」と言う'},
+    {e:'🤗',t:'「何かわからんけど一緒にいます」と言う'}
+  ]}
+];
+
+// 起動
+setTimeout(function() {
+  var s = document.getElementById('p1');
+  s.style.transition = 'opacity 0.8s ease';
+  s.style.opacity = '0';
+  setTimeout(function() {
+    s.classList.add('hidden');
+    // 毎回今日のことばを表示
+    var w = ANSIN_WORDS[Math.floor(Math.random() * ANSIN_WORDS.length)];
+    document.getElementById('todays-word').textContent = w;
+    showPage('p1b');
+    // タップで次へ
+    document.getElementById('p1b').onclick = function() {
+      try {
+        var sn = localStorage.getItem('hold_name');
+        if (sn) {
+          userName = sn;
+          showPage('p4');
+          updateTodayNm();
+          renderCards();
+          tryLoadHistory();
+          if (document.querySelectorAll('#chat-body .msg').length === 0) {
+            addMsg(userName + 'さん、ここはあなただけの安心の場所です。🌿\n\n今、心にあることをそのまま話してみてください。', 'bot');
+          }
+        } else {
+          showPage('p2');
+        }
+      } catch(e) { showPage('p2'); }
+    };
+  }, 800);
+}, 3500);
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.add('hidden'); });
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function skipToMain() {
+  showPage('p4');
+  updateTodayNm();
+  renderCards();
+  tryLoadHistory();
+}
+
+function submitName() {
+  var inp = document.getElementById('name-input');
+  var n = inp.value.trim();
+  if (!n) { inp.focus(); return; }
+  userName = n;
+  try { localStorage.setItem('hold_name', n); } catch(e) {}
+  document.getElementById('p3-name').textContent = n + 'さん';
+  showPage('p3');
+}
+
+function goToChat() {
+  showPage('p4');
+  updateTodayNm();
+  renderCards();
+  tryLoadHistory();
+  if (document.querySelectorAll('#chat-body .msg').length === 0) {
+    addMsg(userName + 'さん、ここはあなただけの安心の場所です。🌿\n\n今、心にあることをそのまま話してみてください。', 'bot');
+  }
+}
+
+function updateTodayNm() {
+  var el = document.getElementById('today-nm');
+  if (el) el.textContent = userName ? userName + 'さん、今日はどんな気持ちですか？' : '今日はどんな気持ちですか？';
+}
+
+function switchTab(t) {
+  if (t === 'chat') {
+    showPage('p4');
+  } else {
+    showPage('p5');
+  }
+}
+
+function getTime() {
+  return new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit'});
+}
+
+function addMsg(text, type, isClosing) {
+  var area = document.getElementById('chat-body');
+  var div = document.createElement('div');
+  div.className = 'msg ' + type + (isClosing ? ' closing' : '');
+  div.innerHTML = '<div class="bubble">' + text.replace(/\n/g,'<br>') + '</div><div class="mtime">' + (type==='bot'?'HOLD':getTime()) + '</div>';
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+  saveHistory();
+}
+
+function showTyping() {
+  var area = document.getElementById('chat-body');
+  var div = document.createElement('div');
+  div.className = 'msg bot'; div.id = 'typing';
+  div.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  area.appendChild(div); area.scrollTop = area.scrollHeight;
+}
+function removeTyping() { var t=document.getElementById('typing'); if(t)t.remove(); }
+
+function getReply() {
+  if (phase === 'initial') { phase = 'deep1'; return DEEP_FLOW[0]; }
+  if (phase === 'deep1')   { phase = 'deep2'; return DEEP_FLOW[1]; }
+  if (phase === 'deep2')   { phase = 'deep3'; return DEEP_FLOW[2]; }
+  if (phase === 'deep3')   { phase = 'deep4'; return DEEP_FLOW[3]; }
+  if (phase === 'deep4')   { phase = 'closing'; return DEEP_FLOW[4]; }
+  if (phase === 'closing') { phase = 'done'; return null; }
+  return null;
+}
+
+function handleSend(text) {
+  if (!text) return;
+  addMsg(text, 'user');
+  var btn = document.getElementById('send-btn');
+  btn.disabled = true;
+  showTyping();
+  setTimeout(function() {
+    removeTyping();
+    var reply = getReply();
+    if (!reply) {
+      // closing後の返信
+      var area = document.getElementById('chat-body');
+      var closing = 'それではあせらず、少しずつやってみませんか？\n\nよかったら、心がほっとするような\n小さな行動を見てください。\n\nまずは自分を安心させてあげることが\n一番の近道だから。🌿';
+      var div = document.createElement('div');
+      div.className = 'msg bot closing';
+      div.innerHTML = '<div class="bubble">' + closing.replace(/\n/g,'<br>') + '</div><div class="mtime">HOLD</div>';
+      area.appendChild(div);
+      area.scrollTop = area.scrollHeight;
+      saveHistory();
+      setTimeout(function(){
+        var gb = document.createElement('button');
+        gb.className = 'btn-go';
+        gb.textContent = '🌿 小さな安心行動を見てみる';
+        gb.onclick = function(){ switchTab('cards'); };
+        area.appendChild(gb);
+        var rb = document.createElement('button');
+        rb.className = 'btn-restart';
+        rb.textContent = '🌿 新しい気持ちを話す';
+        rb.onclick = restartChat;
+        area.appendChild(rb);
+        area.scrollTop = area.scrollHeight;
+      }, 600);
+      document.getElementById('user-input').disabled = true;
+      document.getElementById('user-input').placeholder = '';
+    } else {
+      addMsg(reply, 'bot');
+      btn.disabled = false;
+    }
+  }, 800 + Math.floor(Math.random()*500));
+}
+
+function sendMsg() {
+  var inp = document.getElementById('user-input');
+  var text = inp.value.trim();
+  if (!text) return;
+  inp.value = ''; inp.style.height = '44px';
+  handleSend(text);
+}
+
+function restartChat() {
+  phase = 'initial';
+  try { localStorage.removeItem('hold_chat'); } catch(e) {}
+  document.getElementById('chat-body').innerHTML = '';
+  var inp = document.getElementById('user-input');
+  inp.disabled = false; inp.placeholder = '今、心にあることをそのまま…';
+  document.getElementById('send-btn').disabled = false;
+  addMsg(userName + 'さん、またここに戻ってきてくれてありがとう。🌿\n\n今、心にあることをそのまま話してみてください。', 'bot');
+}
+
+function showTodayCard() {
+  var c = FREE_CARDS[freeIdx % FREE_CARDS.length];
+  freeIdx++;
+  document.getElementById('tc-ico').textContent = c.e;
+  document.getElementById('tc-txt').textContent = c.t;
+  document.getElementById('today-card').classList.add('show');
+}
+
+function renderCards() {
+  var list = document.getElementById('cards-list');
+  list.innerHTML = '';
+  var n = 1;
+  CATS.forEach(function(cat) {
+    var sec = document.createElement('div');
+    sec.className = 'cat-sec';
+    var tt = document.createElement('div');
+    tt.className = 'cat-ttl';
+    tt.textContent = cat.title;
+    sec.appendChild(tt);
+    var grid = document.createElement('div');
+    grid.className = 'cards-grid';
+    cat.cards.forEach(function(c) {
+      var num = n++;
+      var locked = !unlocked && num > 5;
+      var el = document.createElement('div');
+      el.className = 'acard' + (doneCards[num] ? ' done' : '');
+      el.innerHTML = '<div class="cnum">' + num + '</div><div class="cchk">✓</div><div class="ctxt">' + c.t + '</div>' + (locked ? '<div class="lock-ov">🔒</div>' : '');
+      if (locked) {
+        el.onclick = showModal;
+      } else {
+        (function(nn){ el.onclick = function(){ if(doneCards[nn]){delete doneCards[nn];}else{doneCards[nn]=true;} renderCards(); }; })(num);
+      }
+      grid.appendChild(el);
+    });
+    sec.appendChild(grid);
+    list.appendChild(sec);
+  });
+}
+
+function showModal() { document.getElementById('modal').classList.add('show'); }
+function purchase() {
+  document.getElementById('modal').classList.remove('show');
+  unlocked = true;
+  document.getElementById('buy-banner').style.display = 'none';
+  renderCards();
+}
+
+function saveHistory() {
+  try {
+    var msgs = [];
+    document.querySelectorAll('#chat-body .msg').forEach(function(m) {
+      var b = m.querySelector('.bubble');
+      if (b) msgs.push({
+        type: m.classList.contains('user') ? 'user' : m.classList.contains('closing') ? 'closing' : 'bot',
+        html: b.innerHTML
+      });
+    });
+    localStorage.setItem('hold_chat', JSON.stringify({msgs:msgs, phase:phase}));
+  } catch(e) {}
+}
+
+function tryLoadHistory() {
+  try {
+    var saved = localStorage.getItem('hold_chat');
+    if (!saved) return;
+    var data = JSON.parse(saved);
+    if (!data.msgs || !data.msgs.length) return;
+    var area = document.getElementById('chat-body');
+    area.innerHTML = '';
+    data.msgs.forEach(function(m) {
+      var div = document.createElement('div');
+      div.className = 'msg ' + m.type + (m.type==='closing' ? ' closing' : '');
+      div.innerHTML = '<div class="bubble">' + m.html + '</div><div class="mtime">HOLD</div>';
+      area.appendChild(div);
+    });
+    if (data.phase) phase = data.phase;
+    if (phase === 'done') {
+      document.getElementById('user-input').disabled = true;
+      document.getElementById('user-input').placeholder = '';
+      var gb = document.createElement('button');
+      gb.className = 'btn-go'; gb.textContent = '🌿 小さな安心行動を見てみる';
+      gb.onclick = function(){ switchTab('cards'); }; area.appendChild(gb);
+      var rb = document.createElement('button');
+      rb.className = 'btn-restart'; rb.textContent = '🌿 新しい気持ちを話す';
+      rb.onclick = restartChat; area.appendChild(rb);
+    } else {
+      document.getElementById('send-btn').disabled = false;
+    }
+    area.scrollTop = 99999;
+  } catch(e) {}
+}
+</script>
+
+</body>
+</html>
