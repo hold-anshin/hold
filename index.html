@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>HOLD</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj48cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgcng9IjMwIiBmaWxsPSJ1cmwoI2cpIi8+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZmZlMGU4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZjBhMGI1Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHRleHQgeD0iNjAiIHk9IjUwIiBmb250LXNpemU9IjM2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIj7wn4y/PC90ZXh0Pjx0ZXh0IHg9IjYwIiB5PSI4NiIgZm9udC1zaXplPSIyMiIgZm9udC1mYW1pbHk9InNlcmlmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWE0YTVhIiBsZXR0ZXItc3BhY2luZz0iNCIgZm9udC13ZWlnaHQ9IjMwMCI+SE9MRDwvdGV4dD48L3N2Zz4=">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="HOLD">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root {
@@ -19,37 +23,40 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
 .page.hidden { opacity:0; pointer-events:none; }
 
 /* ━ P1 スプラッシュ */
-#p1 { background:linear-gradient(160deg,#fff0f3,#fce0e8,#f5c6d0); align-items:center; justify-content:center; gap:0.6rem; padding-bottom:3rem; }
-#p1 .ico { font-size:2.8rem; animation:sway 3s ease-in-out infinite; }
-#p1 h1 { font-family:‘Noto Serif JP’,serif; font-size:3.2rem; color:var(–dark); letter-spacing:0.5em; font-weight:300; margin-top:0.3rem; }
-#p1 .t1 { font-family:‘Noto Serif JP’,serif; font-size:1rem; color:var(–dark); letter-spacing:0.2em; margin-top:0.6rem; font-weight:400; }
-#p1 .t2 { font-family:‘Noto Serif JP’,serif; font-size:0.88rem; color:var(–dark); letter-spacing:0.15em; margin-top:0.3rem; font-weight:300; }
+#p1 { background:linear-gradient(160deg,#fff0f3,#fce0e8,#f5c6d0); align-items:center; justify-content:center; gap:0.5rem; padding-bottom:10rem; }
+#p1 .ico { font-size:3.8rem; animation:sway 3s ease-in-out infinite; margin-bottom:0.5rem; }
+#p1 h1 { font-family:‘Noto Serif JP’,serif; font-size:3.6rem; color:var(–dark); letter-spacing:0.5em; font-weight:300; margin-top:0.3rem; margin-bottom:1.2rem; }
+#p1 .t1 { font-family:‘Noto Serif JP’,serif; font-size:1.1rem; color:var(–dark); letter-spacing:0.2em; margin-top:0.6rem; font-weight:400; }
+#p1 .t2 { font-family:‘Noto Serif JP’,serif; font-size:1rem; color:var(–dark); letter-spacing:0.1em; margin-top:0.3rem; font-weight:300; }
+#p1 .t1e { font-family:‘Zen Kaku Gothic New’,sans-serif; font-size:0.88rem; color:var(–dark); letter-spacing:0.08em; margin-top:0.1rem; font-weight:400; opacity:1; }
+#p1 .t2e { font-family:‘Zen Kaku Gothic New’,sans-serif; font-size:0.88rem; color:var(–dark); letter-spacing:0.06em; margin-top:0.1rem; font-weight:400; opacity:1; }
+.en { display:block; font-size:0.85rem; color:var(–dark); letter-spacing:0.05em; font-weight:400; margin-top:0.25rem; opacity:1; font-family:‘Zen Kaku Gothic New’,sans-serif; }
 #p1 .dots { display:flex; gap:6px; margin-top:2rem; }
 #p1 .dots span { width:6px; height:6px; border-radius:50%; background:var(–mid); animation:pulse 1.4s ease-in-out infinite; }
 #p1 .dots span:nth-child(2){animation-delay:.2s;}
 #p1 .dots span:nth-child(3){animation-delay:.4s;}
 
 /* ━ P1b 今日のことば */
-#p1b { background:linear-gradient(160deg,#fff0f3,#fce0e8,#f5c6d0); align-items:center; justify-content:center; padding:2rem; gap:1.2rem; padding-bottom:8rem; }
-#p1b .leaf { font-size:2.8rem; animation:sway 3s ease-in-out infinite; }
-#p1b .label { font-family:‘Noto Serif JP’,serif; font-size:0.9rem; color:var(–tp); letter-spacing:0.25em; }
-#p1b .word { font-family:‘Noto Serif JP’,serif; font-size:1.35rem; color:var(–dark); font-weight:400; text-align:center; line-height:2; letter-spacing:0.05em; padding:1.8rem 2rem; background:rgba(255,255,255,0.6); border-radius:20px; border:1px solid var(–mid); max-width:320px; }
-#p1b .hint { font-size:0.85rem; color:var(–tp); letter-spacing:0.1em; animation: fadeUp 1s ease 1s both; }
+#p1b { background:linear-gradient(160deg,#fff0f3,#fce0e8,#f5c6d0); align-items:center; justify-content:center; padding:2rem; gap:1.6rem; padding-bottom:10rem; }
+#p1b .leaf { font-size:4.5rem; animation:sway 3s ease-in-out infinite; }
+#p1b .label { font-family:‘Noto Serif JP’,serif; font-size:1.1rem; color:var(–dark); letter-spacing:0.25em; margin-bottom:1.8rem; }
+#p1b .word { font-family:‘Noto Serif JP’,serif; font-size:1.5rem; color:var(–dark); font-weight:400; text-align:center; line-height:2; letter-spacing:0.05em; padding:2rem 2.2rem; background:rgba(255,255,255,0.85); border-radius:20px; border:2px solid var(–deep); max-width:340px; box-shadow:0 4px 20px rgba(200,120,140,0.15); }
+#p1b .hint { font-size:0.85rem; color:var(–dark); letter-spacing:0.1em; animation: fadeUp 1s ease 1s both; margin-top:1.5rem; }
 
 /* ━ P2 名前入力 */
-#p2 { background:linear-gradient(160deg,#fff5f7,#fce4ea); align-items:center; justify-content:flex-start; padding:5rem 2rem 2rem; gap:1.4rem; }
-#p2 .ico { font-size:2.2rem; animation:sway 3s ease-in-out infinite; }
-#p2 h2 { font-family:‘Noto Serif JP’,serif; font-size:1.05rem; color:var(–dark); font-weight:400; text-align:center; line-height:2; }
-#p2 input { width:100%; max-width:300px; border:1.5px solid var(–mid); border-radius:30px; padding:.9rem 1.3rem; font-family:inherit; font-size:16px; color:var(–text); background:var(–white); outline:none; text-align:center; transition:border-color .2s; }
+#p2 { background:linear-gradient(160deg,#fff5f7,#fce4ea); align-items:center; justify-content:flex-start; padding:3rem 2rem 2rem; gap:0.5rem; }
+#p2 .ico { font-size:4rem; animation:sway 3s ease-in-out infinite; margin-bottom:0.5rem; }
+#p2 h2 { font-family:‘Noto Serif JP’,serif; font-size:1.2rem; color:var(–dark); font-weight:400; text-align:center; line-height:2.6; margin-bottom:0; }
+#p2 input { width:100%; max-width:300px; border:1.5px solid var(–mid); border-radius:30px; padding:.9rem 1.3rem; font-family:inherit; font-size:16px; color:var(–text); background:var(–white); outline:none; text-align:center; transition:border-color .2s; margin-top:0.3rem; }
 #p2 input:focus { border-color:var(–deep); }
 #p2 input::placeholder { color:var(–mid); }
 
 /* ━ P3 クッション */
-#p3 { align-items:center; justify-content:flex-start; padding:5rem 2rem 2rem; gap:1.8rem; }
-#p3 .ico { font-size:2rem; animation:sway 3s ease-in-out infinite; }
+#p3 { align-items:center; justify-content:flex-start; padding:3rem 2rem 2rem; gap:1.5rem; }
+#p3 .ico { font-size:3.5rem; animation:sway 3s ease-in-out infinite; }
 #p3 .box { text-align:center; }
-#p3 .nm { font-family:‘Noto Serif JP’,serif; font-size:1.25rem; color:var(–dark); margin-bottom:1.2rem; }
-#p3 .bd { font-size:.88rem; color:var(–text); line-height:2.1; }
+#p3 .nm { font-family:‘Noto Serif JP’,serif; font-size:1.5rem; color:var(–dark); margin-bottom:1rem; }
+#p3 .bd { font-size:1.05rem; color:var(–text); line-height:2.3; }
 
 /* ━ ヘッダー＆タブ */
 .hdr { background:linear-gradient(160deg,#fff5f7,#fce4ea); padding:.9rem 1.2rem .75rem; text-align:center; border-bottom:1px solid var(–mid); flex-shrink:0; }
@@ -66,7 +73,7 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
 .msg.bot { align-self:flex-start; }
 .msg.user { align-self:flex-end; }
 .bubble { padding:.85rem 1rem; font-size:.86rem; line-height:1.8; }
-.msg.bot .bubble { background:var(–white); border-radius:4px 16px 16px 16px; box-shadow:0 2px 10px rgba(200,120,140,.1); border:1px solid var(–light); color:var(–text); }
+.msg.bot .bubble { background:var(–white); border-radius:4px 16px 16px 16px; box-shadow:0 2px 10px rgba(200,120,140,.15); border:1.5px solid var(–mid); color:var(–text); }
 .msg.user .bubble { background:linear-gradient(135deg,#f0a0b5,#e07090); color:white; border-radius:16px 16px 4px 16px; box-shadow:0 3px 12px rgba(224,112,144,.3); }
 .msg.closing { max-width:95%; align-self:center; }
 .msg.closing .bubble { background:linear-gradient(135deg,#fff0f3,#fce4ea); border:1.5px solid var(–deep); text-align:center; font-family:‘Noto Serif JP’,serif; font-size:.86rem; color:var(–dark); line-height:2.1; border-radius:16px; box-shadow:0 4px 18px rgba(200,120,140,.15); }
@@ -148,7 +155,9 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
   <div class="ico">🌿</div>
   <h1>HOLD</h1>
   <p class="t1">安心に戻るアプリ</p>
-  <p class="t2">全てをやさしく包み込む</p>
+  <p class="t1e">Return to your inner peace</p>
+  <p class="t2">本当の自分の気持ちに会いにいく</p>
+  <p class="t2e">Go meet your true feelings</p>
   <div class="dots"><span></span><span></span><span></span></div>
 </div>
 
@@ -156,20 +165,20 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
 
 <div class="page hidden" id="p1b">
   <div class="leaf">🌿</div>
-  <div class="label">今日の安心のことば</div>
+  <div class="label">今日の安心のことば<span class="en">Today's words of comfort</span></div>
   <div class="word" id="todays-word"></div>
-  <div class="hint">タップして次へ</div>
+  <div class="hint">タップして次へ<span class="en">Tap to continue</span></div>
 </div>
 
 <!-- P2 名前入力 -->
 
 <div class="page hidden" id="p2">
   <div class="ico">🌿</div>
-  <h2>ここはあなただけの<br>安心の場所です<br><br>あなたのお名前を<br>教えてください</h2>
+  <h2>ここはあなただけの<br>安心の場所です<br><span class="en">This is your safe place</span><br><span style="display:block;height:0.8rem"></span>あなたのお名前を<br>教えてください<br><span class="en">Please tell me your name</span></h2>
   <input id="name-input" type="text" placeholder="お名前（ニックネームでも）"
     autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
     onkeydown="if(event.key==='Enter'){submitName()}">
-  <button class="btn-main" onclick="submitName()">はじめる 🌿</button>
+  <button class="btn-main" onclick="submitName()">はじめる 🌿<span class="en" style="display:block;font-size:0.75rem;opacity:0.9;margin-top:0.2rem;">Let's start</span></button>
 </div>
 
 <!-- P3 クッション -->
@@ -178,9 +187,9 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
   <div class="ico">🌿</div>
   <div class="box">
     <div class="nm" id="p3-name"></div>
-    <div class="bd">ここではあなたの気持ちを<br>ゆっくり見つめていきます<br><br>正しい答えを出す必要はありません<br>思いつくまま書いてみてください</div>
+    <div class="bd">ここではあなたの気持ちを<br>ゆっくり見つめていきます<br><span class="en">We'll gently look at your feelings together</span><br><br>正しい答えを出す必要はありません<br>思いつくまま書いてみてください<br><span class="en">There are no right answers. Just write freely</span></div>
   </div>
-  <button class="btn-main" onclick="goToChat()">次へ 🌿</button>
+  <button class="btn-main" onclick="goToChat()">次へ 🌿<span class="en" style="display:block;font-size:0.75rem;opacity:0.9;margin-top:0.2rem;">Next</span></button>
 </div>
 
 <!-- P4 チャット -->
@@ -188,15 +197,15 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
 <div class="page hidden" id="p4">
   <div class="hdr">
     <div class="logo">HOLD</div>
-    <div class="sub">安心にもどる</div>
+    <div class="sub">安心にもどる<span class="en" style="display:block;font-size:0.62rem;opacity:1;color:var(--tp);">Return to peace</span></div>
   </div>
   <div class="tabs">
-    <div class="tab active" id="tab-chat" onclick="switchTab('chat')">🌿 自分と向き合う</div>
-    <div class="tab" id="tab-cards" onclick="switchTab('cards')">🌿 行動カード</div>
+    <div class="tab active" id="tab-chat" onclick="switchTab('chat')">🌿 自分と向き合う<span style="display:block;font-size:0.6rem;opacity:0.8;">Face yourself</span></div>
+    <div class="tab" id="tab-cards" onclick="switchTab('cards')">🌿 行動カード<span style="display:block;font-size:0.6rem;opacity:0.8;">Action cards</span></div>
   </div>
   <div id="chat-body"></div>
   <div class="inp-area">
-    <textarea id="user-input" placeholder="今、心にあることをそのまま…" rows="1"
+    <textarea id="user-input" placeholder="Share whatever is on your mind..." rows="1"
       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
       oninput="this.style.height='44px';this.style.height=Math.min(this.scrollHeight,80)+'px'"></textarea>
     <button class="send-btn" id="send-btn" onclick="sendMsg()">→</button>
@@ -208,27 +217,27 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
 <div class="page hidden" id="p5">
   <div class="hdr">
     <div class="logo">HOLD</div>
-    <div class="sub">安心にもどる</div>
+    <div class="sub">安心にもどる<span class="en" style="display:block;font-size:0.62rem;opacity:1;color:var(--tp);">Return to peace</span></div>
   </div>
   <div class="tabs">
-    <div class="tab" id="tab2-chat" onclick="switchTab('chat')">🌿 自分と向き合う</div>
-    <div class="tab active" id="tab2-cards" onclick="switchTab('cards')">🌿 行動カード</div>
+    <div class="tab" id="tab2-chat" onclick="switchTab('chat')">🌿 自分と向き合う<span style="display:block;font-size:0.6rem;opacity:0.8;">Face yourself</span></div>
+    <div class="tab active" id="tab2-cards" onclick="switchTab('cards')">🌿 行動カード<span style="display:block;font-size:0.6rem;opacity:0.8;">Action cards</span></div>
   </div>
   <div id="cards-body">
     <div class="today-sec">
       <div class="today-nm" id="today-nm"></div>
-      <button class="today-btn" onclick="showTodayCard()">今日の安心</button>
+      <button class="today-btn" onclick="showTodayCard()">今日の安心<span style="display:block;font-size:0.7rem;opacity:0.9;margin-top:0.1rem;">Today's comfort</span></button>
       <div class="tc" id="today-card">
-        <div class="tc-lbl">今日はこれをやってみませんか？</div>
+        <div class="tc-lbl">今日はこれをやってみませんか？<span class="en" style="display:block;font-size:0.72rem;margin-top:0.2rem;">Why not try this today?</span></div>
         <div class="tc-ico" id="tc-ico"></div>
         <div class="tc-txt" id="tc-txt"></div>
       </div>
     </div>
-    <div class="sec-ttl">🌿 安心カード 100選</div>
+    <div class="sec-ttl">🌿 安心カード 100選<span class="en" style="display:block;font-size:0.7rem;">100 Comfort Cards</span></div>
     <div id="buy-banner" class="buy-banner" onclick="showModal()">
       <div class="bl">
-        <h3>🌿 行動カード 100選</h3>
-        <p>心と体が楽になる100の小さな行動<br>自分に合ったものを続けてみてください</p>
+        <h3>🌿 行動カード 100選<span style="display:block;font-size:0.7rem;font-weight:300;opacity:0.9;">100 Action Cards</span></h3>
+        <p>心と体が楽になる100の小さな行動<br>自分に合ったものを続けてみてください<br><span style="font-size:0.65rem;opacity:0.9;">100 small actions for mind & body</span></p>
       </div>
       <button class="buy-btn-sm">¥980</button>
     </div>
@@ -242,8 +251,8 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
   <div class="modal">
     <div class="ico">🌿</div>
     <h2>行動カード 100選</h2>
-    <p>心と体が楽になる<br>100の小さな行動。<br><br>無理せずひとつずつ試してみて<br>自分に合ったものを続けてみてください。<br><br>¥980<br>購入すると全部表示されます</p>
-    <button class="modal-btn" onclick="purchase()">購入する</button>
+    <p>心と体が楽になる<br>100の小さな行動。<br><span style="font-size:0.75rem;color:var(--tp);">100 small actions for mind & body.</span><br><br>無理せずひとつずつ試してみて<br>自分に合ったものを続けてみてください。<br><span style="font-size:0.75rem;color:var(--tp);">Take it one step at a time.</span><br><br>¥980<br>購入すると全部表示されます<br><span style="font-size:0.75rem;color:var(--tp);">Unlock all 100 cards</span></p>
+    <button class="modal-btn" onclick="purchase()">購入する<span style="display:block;font-size:0.7rem;opacity:0.9;margin-top:0.1rem;">Purchase</span></button>
   </div>
 </div>
 
@@ -289,66 +298,66 @@ var freeIdx = 0;
 
 var FREE_CARDS = [
   {e:'☕', t:'温かい飲み物をゆっくり飲む'},
-  {e:'☁️', t:'空を1分ぼーっと眺める'},
+  {e:'☁️', t:'空を1分ぼーっと眺める<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Stare at the sky for 1 minute</small>'},
   {e:'💗', t:'胸に手を当てて「大丈夫だよ」と言う'},
-  {e:'💆', t:'肩をくるくる回す'},
+  {e:'💆', t:'肩をくるくる回す<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Roll your shoulders gently</small>'},
   {e:'✨', t:'今日頑張ったことを1つ認める'}
 ];
 
 var DEEP_FLOW = [
-  'よかったら少しだけ一緒に見てみよう\n\nどうしてそう思ったの？',
-  'どうしてそう感じたの？',
-  'それはいつ頃からかな？',
-  'その時、本当はどんな気持ちだった？',
-  'じゃあ本当はどうしたい？\n目を閉じ胸に手を当ててゆっくり\n感じてみてください'
+  'よかったら少しだけ一緒に見てみよう\n\nどうしてそう思ったの？\n\n— Let\'s gently explore this together\nWhy do you feel that way?',
+  'どうしてそう感じたの？\n\n— What made you feel that way?',
+  'それはいつ頃からかな？\n\n— When did this feeling begin?',
+  'その時、本当はどんな気持ちだった？\n\n— What were you truly feeling then?',
+  'じゃあ本当はどうしたい？\n目を閉じ胸に手を当ててゆっくり\n感じてみてください\n\n— What do you truly want?\nClose your eyes, place your hand on your heart,\nand gently feel the answer.'
 ];
 
 var CATS = [
   { title:'🌿 心を落ち着ける', cards:[
-    {e:'☁️',t:'空を1分ぼーっと眺める'},{e:'🌊',t:'静かな音を聴く'},{e:'😌',t:'30秒目を閉じて休む'},
-    {e:'🌟',t:'今日良かったことを1つ思い出す'},{e:'😊',t:'今日嬉しかったことを思い出す'},{e:'🎠',t:'今日楽しかったことを思い出す'},
-    {e:'🫁',t:'ゆっくり深呼吸を3回する'},{e:'🏔️',t:'好きな景色を思い浮かべる'},{e:'🌬️',t:'自分の呼吸を静かに感じる'},
-    {e:'📝',t:'今の気持ちをノートに1行書く'},{e:'🕊️',t:'「焦らなくていい」とつぶやく'},{e:'💬',t:'「もう十分だよ」と自分に言う'},
-    {e:'🌈',t:'「私は私でいい」とつぶやく'},{e:'🛡️',t:'「私は安全」と心の中で言う'},{e:'💗',t:'「大丈夫だよ」と自分に言う'}
+    {e:'☁️',t:'空を1分ぼーっと眺める<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Stare at the sky for 1 minute</small>'},{e:'🌊',t:'静かな音を聴く<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Listen to a quiet sound</small>'},{e:'😌',t:'30秒目を閉じて休む<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Close your eyes and rest for 30 seconds</small>'},
+    {e:'🌟',t:'今日良かったことを1つ思い出す<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Recall one good thing from today</small>'},{e:'😊',t:'今日嬉しかったことを思い出す<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Remember something that made you happy today</small>'},{e:'🎠',t:'今日楽しかったことを思い出す<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Remember something fun from today</small>'},
+    {e:'🫁',t:'ゆっくり深呼吸を3回する<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Take 3 slow deep breaths</small>'},{e:'🏔️',t:'好きな景色を思い浮かべる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Picture your favorite scenery</small>'},{e:'🌬️',t:'自分の呼吸を静かに感じる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Quietly notice your breathing</small>'},
+    {e:'📝',t:'今の気持ちをノートに1行書く<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Write one line about how you feel now</small>'},{e:'🕊️',t:'「焦らなくていい」とつぶやく<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Whisper "No need to rush"</small>'},{e:'💬',t:'「もう十分だよ」と自分に言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Tell yourself "You&#39;ve done enough"</small>'},
+    {e:'🌈',t:'「私は私でいい」とつぶやく<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Whisper "I am enough as I am"</small>'},{e:'🛡️',t:'「私は安全」と心の中で言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "I am safe" in your heart</small>'},{e:'💗',t:'「大丈夫だよ」と自分に言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Tell yourself "It&#39;s okay"</small>'}
   ]},
   { title:'🌿 体をゆるめる', cards:[
-    {e:'🤸',t:'ゆっくり背伸びをする'},{e:'💆',t:'肩をくるくる回す'},{e:'🌙',t:'首をゆっくり左右に倒す'},
-    {e:'🙌',t:'腕を上げてバンザイする'},{e:'🫁',t:'ゆっくりお腹呼吸をする'},{e:'✊',t:'手をぎゅっと握ってゆるめる'},
-    {e:'🦵',t:'足を軽くトントン動かす'},{e:'🌊',t:'体を軽く揺らしてみる'},{e:'🤲',t:'手首をゆっくり回す'},
-    {e:'🦶',t:'足首をゆっくり回す'},{e:'💪',t:'肩の力をふっと抜く'},{e:'🙆',t:'その場でゆっくり伸びをする'},
-    {e:'🪑',t:'椅子に深く座る'},{e:'🫶',t:'背中を椅子に預ける'},{e:'☕',t:'手を温める'}
+    {e:'🤸',t:'ゆっくり背伸びをする<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Stretch slowly</small>'},{e:'💆',t:'肩をくるくる回す<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Roll your shoulders gently</small>'},{e:'🌙',t:'首をゆっくり左右に倒す<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Slowly tilt your head side to side</small>'},
+    {e:'🙌',t:'腕を上げてバンザイする<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Raise both arms up high</small>'},{e:'🫁',t:'ゆっくりお腹呼吸をする<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Breathe slowly into your belly</small>'},{e:'✊',t:'手をぎゅっと握ってゆるめる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Squeeze your hands tight then release</small>'},
+    {e:'🦵',t:'足を軽くトントン動かす<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Lightly tap your feet</small>'},{e:'🌊',t:'体を軽く揺らしてみる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently sway your body</small>'},{e:'🤲',t:'手首をゆっくり回す<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Slowly rotate your wrists</small>'},
+    {e:'🦶',t:'足首をゆっくり回す<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Slowly rotate your ankles</small>'},{e:'💪',t:'肩の力をふっと抜く<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Let the tension drop from your shoulders</small>'},{e:'🙆',t:'その場でゆっくり伸びをする<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Stretch gently where you are</small>'},
+    {e:'🪑',t:'椅子に深く座る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Sit back deeply in your chair</small>'},{e:'🫶',t:'背中を椅子に預ける<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Let your back rest against the chair</small>'},{e:'☕',t:'手を温める<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Warm your hands</small>'}
   ]},
   { title:'🌿 体の感覚を感じる', cards:[
-    {e:'👣',t:'足の裏を感じながら歩く'},{e:'🪨',t:'足の裏を床につけて感覚を感じる'},{e:'👐',t:'手のひらを眺めてみる'},
-    {e:'🦵',t:'足の裏を優しく包む'},{e:'💪',t:'ふくらはぎを優しく挟む'},{e:'🌺',t:'太ももに手を置く'},
-    {e:'💓',t:'胸に手を置く'},{e:'🫶',t:'お腹をトントンする'},{e:'🙏',t:'体をさすってみる'},
-    {e:'🤲',t:'頭をなでる'},{e:'🫂',t:'自分をぎゅっと抱きしめる'},{e:'💝',t:'手をさする'},
-    {e:'🦶',t:'足をさする'},{e:'💗',t:'胸に手を当てて呼吸する'},{e:'🌱',t:'体の重さを感じる'}
+    {e:'👣',t:'足の裏を感じながら歩く<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Walk while feeling the soles of your feet</small>'},{e:'🪨',t:'足の裏を床につけて感覚を感じる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Feel your feet touching the floor</small>'},{e:'👐',t:'手のひらを眺めてみる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Look at the palms of your hands</small>'},
+    {e:'🦵',t:'足の裏を優しく包む<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently hold your feet</small>'},{e:'💪',t:'ふくらはぎを優しく挟む<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently squeeze your calves</small>'},{e:'🌺',t:'太ももに手を置く<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Place your hands on your thighs</small>'},
+    {e:'💓',t:'胸に手を置く<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Place your hand on your chest</small>'},{e:'🫶',t:'お腹をトントンする<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently pat your belly</small>'},{e:'🙏',t:'体をさすってみる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently stroke your body</small>'},
+    {e:'🤲',t:'頭をなでる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently stroke your head</small>'},{e:'🫂',t:'自分をぎゅっと抱きしめる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Give yourself a warm hug</small>'},{e:'💝',t:'手をさする<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently rub your hands</small>'},
+    {e:'🦶',t:'足をさする<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently rub your feet</small>'},{e:'💗',t:'胸に手を当てて呼吸する<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Breathe with your hand on your chest</small>'},{e:'🌱',t:'体の重さを感じる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Feel the weight of your body</small>'}
   ]},
   { title:'🌿 環境を整える', cards:[
-    {e:'🪟',t:'窓を開けて空気を吸う'},{e:'🚶',t:'数分外を歩く'},{e:'🌿',t:'植物に「こんにちは」と声をかける'},
-    {e:'🌼',t:'好きなものを周りに置く'},{e:'🧹',t:'部屋を少しだけ整える'},{e:'☀️',t:'カーテンを開けて光を入れる'},
-    {e:'☁️',t:'空を見上げる'},{e:'🌬️',t:'外の風を感じる'},{e:'🪑',t:'好きな場所に座る'},
-    {e:'🛋️',t:'椅子にゆったり座る'},{e:'🏠',t:'部屋の好きな場所を見る'},{e:'🌞',t:'太陽の光を浴びる'},
-    {e:'🌫️',t:'空気をゆっくり吸う'},{e:'📚',t:'机を少し整える'},{e:'✨',t:'好きな空間を作る'}
+    {e:'🪟',t:'窓を開けて空気を吸う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Open a window and breathe the air</small>'},{e:'🚶',t:'数分外を歩く<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Walk outside for a few minutes</small>'},{e:'🌿',t:'植物に「こんにちは」と声をかける<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say hello to a plant</small>'},
+    {e:'🌼',t:'好きなものを周りに置く<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Place your favorite things around you</small>'},{e:'🧹',t:'部屋を少しだけ整える<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Tidy up your room just a little</small>'},{e:'☀️',t:'カーテンを開けて光を入れる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Open the curtains and let in light</small>'},
+    {e:'☁️',t:'空を見上げる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Look up at the sky</small>'},{e:'🌬️',t:'外の風を感じる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Feel the outside breeze</small>'},{e:'🪑',t:'好きな場所に座る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Sit in your favorite spot</small>'},
+    {e:'🛋️',t:'椅子にゆったり座る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Sit comfortably in a chair</small>'},{e:'🏠',t:'部屋の好きな場所を見る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Look at your favorite part of the room</small>'},{e:'🌞',t:'太陽の光を浴びる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Bask in the sunlight</small>'},
+    {e:'🌫️',t:'空気をゆっくり吸う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Slowly breathe in the air</small>'},{e:'📚',t:'机を少し整える<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Tidy your desk a little</small>'},{e:'✨',t:'好きな空間を作る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Create your favorite little space</small>'}
   ]},
   { title:'🌿 小さな楽しみ', cards:[
-    {e:'🎵',t:'好きな曲を1曲聴く'},{e:'🍰',t:'デザートをゆっくり食べる'},{e:'😂',t:'楽しい動画を見る'},
-    {e:'🌸',t:'好きな香りを嗅ぐ'},{e:'☕',t:'温かい飲み物を飲む'},{e:'🎨',t:'好きな色を見る'},
-    {e:'📷',t:'好きな写真を見る'},{e:'🍬',t:'甘いものを一口食べる'},{e:'🍵',t:'お茶をゆっくり飲む'},
-    {e:'🎶',t:'好きな音楽を流す'},{e:'🏔️',t:'好きな景色を見る'},{e:'🧸',t:'お気に入りのものに触れる'},
-    {e:'🛏️',t:'好きな毛布に触れる'},{e:'🪑',t:'お気に入りの椅子に座る'},{e:'🌺',t:'好きな香りのものを使う'}
+    {e:'🎵',t:'好きな曲を1曲聴く<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Listen to one favorite song</small>'},{e:'🍰',t:'デザートをゆっくり食べる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Eat a dessert slowly and mindfully</small>'},{e:'😂',t:'楽しい動画を見る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Watch a fun video</small>'},
+    {e:'🌸',t:'好きな香りを嗅ぐ<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Smell your favorite scent</small>'},{e:'☕',t:'温かい飲み物を飲む<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Drink something warm</small>'},{e:'🎨',t:'好きな色を見る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Look at your favorite color</small>'},
+    {e:'📷',t:'好きな写真を見る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Look at a favorite photo</small>'},{e:'🍬',t:'甘いものを一口食べる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Eat one small sweet treat</small>'},{e:'🍵',t:'お茶をゆっくり飲む<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Slowly drink a cup of tea</small>'},
+    {e:'🎶',t:'好きな音楽を流す<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Play your favorite music</small>'},{e:'🏔️',t:'好きな景色を見る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Look at your favorite scenery</small>'},{e:'🧸',t:'お気に入りのものに触れる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Touch your favorite object</small>'},
+    {e:'🛏️',t:'好きな毛布に触れる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Touch your favorite blanket</small>'},{e:'🪑',t:'お気に入りの椅子に座る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Sit in your favorite chair</small>'},{e:'🌺',t:'好きな香りのものを使う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Use something with your favorite scent</small>'}
   ]},
   { title:'🌿 自分を労わる', cards:[
-    {e:'✨',t:'「今日頑張ったね」と言う'},{e:'🙏',t:'「体さんありがとう」と言う'},{e:'💝',t:'「今日もお疲れ様」と言う'},
-    {e:'🌷',t:'「〇〇ちゃんお疲れ様」と言う'},{e:'🫂',t:'自分を優しく抱きしめる'},{e:'🤲',t:'頭をなでてあげる'},
-    {e:'🦶',t:'足をさすってありがとうと言う'},{e:'🙏',t:'体にありがとうと言う'},{e:'💗',t:'胸に手を当てて「大丈夫」と言う'},
-    {e:'😊',t:'自分に微笑んでみる'},{e:'🪞',t:'鏡の中の自分を見る'},{e:'🌻',t:'鏡の中の自分にありがとうと言う'},
-    {e:'⭐',t:'「よくやってるね」と言う'},{e:'🤗',t:'「一緒にいるよ」と言う'},{e:'🌙',t:'「今日はここまででいい」と言う'},
-    {e:'💤',t:'「休んでいいよ」と言う'},{e:'🌸',t:'「よくここまで来たね」と言う'},{e:'🕊️',t:'「無理しなくていいよ」と言う'},
-    {e:'🌿',t:'「ゆっくりで大丈夫」と言う'},{e:'💛',t:'「今のままでいいよ」と言う'},{e:'💖',t:'「あなたは大切だよ」と言う'},
-    {e:'🌱',t:'「今日も生きててえらい」と言う'},{e:'🌈',t:'「少しずつでいいよ」と言う'},{e:'🏠',t:'「ここにいていいよ」と言う'},
-    {e:'🤗',t:'「何かわからんけど一緒にいます」と言う'}
+    {e:'✨',t:'「今日頑張ったね」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "You did well today"</small>'},{e:'🙏',t:'「体さんありがとう」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "Thank you, body"</small>'},{e:'💝',t:'「今日もお疲れ様」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "Good work today"</small>'},
+    {e:'🌷',t:'「〇〇ちゃんお疲れ様」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "Good job, [your name]"</small>'},{e:'🫂',t:'自分を優しく抱きしめる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently hug yourself</small>'},{e:'🤲',t:'頭をなでてあげる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Gently pat your own head</small>'},
+    {e:'🦶',t:'足をさすってありがとうと言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Rub your feet and say thank you</small>'},{e:'🙏',t:'体にありがとうと言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say thank you to your body</small>'},{e:'💗',t:'胸に手を当てて「大丈夫」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Place hand on chest and say "It&#39;s okay"</small>'},
+    {e:'😊',t:'自分に微笑んでみる<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Smile gently to yourself</small>'},{e:'🪞',t:'鏡の中の自分を見る<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Look at yourself in the mirror</small>'},{e:'🌻',t:'鏡の中の自分にありがとうと言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say thank you to yourself in the mirror</small>'},
+    {e:'⭐',t:'「よくやってるね」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "You&#39;re doing well"</small>'},{e:'🤗',t:'「一緒にいるよ」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "I&#39;m here with you"</small>'},{e:'🌙',t:'「今日はここまででいい」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "This is enough for today"</small>'},
+    {e:'💤',t:'「休んでいいよ」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "It&#39;s okay to rest"</small>'},{e:'🌸',t:'「よくここまで来たね」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "You&#39;ve come so far"</small>'},{e:'🕊️',t:'「無理しなくていいよ」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "You don&#39;t have to push yourself"</small>'},
+    {e:'🌿',t:'「ゆっくりで大丈夫」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "Take it slow, it&#39;s okay"</small>'},{e:'💛',t:'「今のままでいいよ」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "You&#39;re okay just as you are"</small>'},{e:'💖',t:'「あなたは大切だよ」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "You are precious"</small>'},
+    {e:'🌱',t:'「今日も生きててえらい」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "You did great just by being here today"</small>'},{e:'🌈',t:'「少しずつでいいよ」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "Little by little is enough"</small>'},{e:'🏠',t:'「ここにいていいよ」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "You belong here"</small>'},
+    {e:'🤗',t:'「何かわからんけど一緒にいます」と言う<br><small style="font-size:0.75em;opacity:1;font-weight:500;color:#9a5a6a;">Say "I don&#39;t know what, but I&#39;m here with you"</small>'}
   ]}
 ];
 
@@ -369,13 +378,8 @@ setTimeout(function() {
         var sn = localStorage.getItem('hold_name');
         if (sn) {
           userName = sn;
-          showPage('p4');
-          updateTodayNm();
-          renderCards();
-          tryLoadHistory();
-          if (document.querySelectorAll('#chat-body .msg').length === 0) {
-            addMsg(userName + 'さん、ここはあなただけの安心の場所です。🌿\n\n今、心にあることをそのまま話してみてください。', 'bot');
-          }
+          document.getElementById('p3-name').textContent = sn + 'さん';
+          showPage('p3');
         } else {
           showPage('p2');
         }
@@ -412,13 +416,13 @@ function goToChat() {
   renderCards();
   tryLoadHistory();
   if (document.querySelectorAll('#chat-body .msg').length === 0) {
-    addMsg(userName + 'さん、ここはあなただけの安心の場所です。🌿\n\n今、心にあることをそのまま話してみてください。', 'bot');
+    addMsg(userName + 'さん、ここはあなただけの安心の場所です。🌿\n\n今、心にあることをそのまま話してみてください。\n\n— This is your safe place.\nShare whatever is on your mind.', 'bot');
   }
 }
 
 function updateTodayNm() {
   var el = document.getElementById('today-nm');
-  if (el) el.textContent = userName ? userName + 'さん、今日はどんな気持ちですか？' : '今日はどんな気持ちですか？';
+  if (el) el.innerHTML = userName ? userName + 'さん、今日はどんな気持ちですか？<span class="en" style="display:block;font-size:0.8rem;margin-top:0.3rem;">How are you feeling today?</span>' : '今日はどんな気持ちですか？<span class="en" style="display:block;font-size:0.8rem;margin-top:0.3rem;">How are you feeling today?</span>';
 }
 
 function switchTab(t) {
@@ -474,7 +478,7 @@ function handleSend(text) {
     if (!reply) {
       // closing後の返信
       var area = document.getElementById('chat-body');
-      var closing = 'それではあせらず、少しずつやってみませんか？\n\nよかったら、心がほっとするような\n小さな行動を見てください。\n\nまずは自分を安心させてあげることが\n一番の近道だから。🌿';
+      var closing = 'それではあせらず、少しずつやってみませんか？\n\nよかったら、心がほっとするような\n小さな行動を見てください。\n\nまずは自分を安心させてあげることが\n一番の近道だから。🌿\n\n— Take it slowly, one small step at a time.\nYour comfort comes first. 🌿';
       var div = document.createElement('div');
       div.className = 'msg bot closing';
       div.innerHTML = '<div class="bubble">' + closing.replace(/\n/g,'<br>') + '</div><div class="mtime">HOLD</div>';
@@ -484,12 +488,12 @@ function handleSend(text) {
       setTimeout(function(){
         var gb = document.createElement('button');
         gb.className = 'btn-go';
-        gb.textContent = '🌿 小さな安心行動を見てみる';
+        gb.innerHTML = '🌿 小さな安心行動を見てみる<span style="display:block;font-size:0.7rem;opacity:0.9;margin-top:0.1rem;">See small comfort actions</span>';
         gb.onclick = function(){ switchTab('cards'); };
         area.appendChild(gb);
         var rb = document.createElement('button');
         rb.className = 'btn-restart';
-        rb.textContent = '🌿 新しい気持ちを話す';
+        rb.innerHTML = '🌿 新しい気持ちを話す<span style="display:block;font-size:0.7rem;opacity:0.8;margin-top:0.1rem;">Talk about new feelings</span>';
         rb.onclick = restartChat;
         area.appendChild(rb);
         area.scrollTop = area.scrollHeight;
@@ -518,7 +522,7 @@ function restartChat() {
   var inp = document.getElementById('user-input');
   inp.disabled = false; inp.placeholder = '今、心にあることをそのまま…';
   document.getElementById('send-btn').disabled = false;
-  addMsg(userName + 'さん、またここに戻ってきてくれてありがとう。🌿\n\n今、心にあることをそのまま話してみてください。', 'bot');
+  addMsg(userName + 'さん、またここに戻ってきてくれてありがとう。🌿\n\n今、心にあることをそのまま話してみてください。\n\n— Welcome back. Share whatever is on your mind.', 'bot');
 }
 
 function showTodayCard() {
@@ -601,10 +605,10 @@ function tryLoadHistory() {
       document.getElementById('user-input').disabled = true;
       document.getElementById('user-input').placeholder = '';
       var gb = document.createElement('button');
-      gb.className = 'btn-go'; gb.textContent = '🌿 小さな安心行動を見てみる';
+      gb.className = 'btn-go'; gb.innerHTML = '🌿 小さな安心行動を見てみる<span style="display:block;font-size:0.7rem;opacity:0.9;margin-top:0.1rem;">See small comfort actions</span>';
       gb.onclick = function(){ switchTab('cards'); }; area.appendChild(gb);
       var rb = document.createElement('button');
-      rb.className = 'btn-restart'; rb.textContent = '🌿 新しい気持ちを話す';
+      rb.className = 'btn-restart'; rb.innerHTML = '🌿 新しい気持ちを話す<span style="display:block;font-size:0.7rem;opacity:0.8;margin-top:0.1rem;">Talk about new feelings</span>';
       rb.onclick = restartChat; area.appendChild(rb);
     } else {
       document.getElementById('send-btn').disabled = false;
