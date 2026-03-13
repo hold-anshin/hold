@@ -228,7 +228,7 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
     <div id="buy-banner" class="buy-banner" onclick="showModal()">
       <div class="bl">
         <h3>🌿 行動カード 100選</h3>
-        <p>心と体が楽になる100の小さな行動<br>自分に合ったものを続けてみてください</p>
+        <p>心と体がホッとする小さな行動100の小さな行動<br>自分に合ったものを続けてみてください</p>
       </div>
       <button class="buy-btn-sm">¥980</button>
     </div>
@@ -242,7 +242,7 @@ html,body { height:100%; overflow:hidden; font-family:'Zen Kaku Gothic New',sans
   <div class="modal">
     <div class="ico">🌿</div>
     <h2>行動カード 100選</h2>
-    <p>心と体が楽になる<br>100の小さな行動。<br><br>無理せずひとつずつ試してみて<br>自分に合ったものを続けてみてください。<br><br>¥980<br>購入すると全部表示されます</p>
+    <p>心と体がホッとする小さな行動<br>100の小さな行動。<br><br>無理せずひとつずつ試してみて<br>自分に合ったものを続けてみてください。<br><br>¥980<br>購入すると全部表示されます</p>
     <button class="modal-btn" onclick="purchase()">購入する</button>
   </div>
 </div>
